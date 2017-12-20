@@ -1,0 +1,64 @@
+
+\begin{tikzpicture}[thick]
+%% Les lettres, cercles et fl�ches verticales
+	\draw (0,0) circle (0.45);
+	\node (C) at (0,0) {C};
+
+	\draw (0,2.5) circle (0.4);
+	\node (H) at (0,2.5) {H};
+
+	\draw (0,5) circle (0.35);
+	\node (P) at (0,5) {P};
+
+	\draw (0,6.5) circle (0.3);
+	\node (N) at (0,6.5) {N};
+
+	\node [above =0.1cm of C](C1) {};
+	\node [above =0.1cm of H] (H1) {};
+	\node [above =0.1cm of P] (P1) {};
+
+	\draw[fleche] (0,2) -- (C1);
+	\draw[fleche] (0,4.5) -- (H1);
+	\draw[fleche] (0,6) to node [midway,right] {\scriptsize growth ($\mu$)} (P1);
+
+
+%% in/out N
+	\node[left] (in_N) at (-1.5,6.5) {\tiny input};
+	\draw[fleche] (in_N) -- (-0.5,6.5);
+
+	\node[right] (out_N) at (1.5,6.5) {\tiny output};
+	\draw[fleche] (0.5,6.5) -- (out_N);
+
+%% in/out P
+	\node[right] (out_P) at (1.5,5) {\scriptsize mortality ($z$)};
+	\draw[fleche] (0.65,5) -- (out_P);
+
+%% out H
+	\node[right] (out_H) at (1.5,2.5) {\scriptsize mortality ($z$)};
+	\draw[fleche] (0.8,2.5) -- (out_H);
+
+%% out C
+	\node[right] (out_C) at (1.5,0) {\scriptsize mortality ($z$)};
+	\draw[fleche] (0.95,0) -- (out_C);
+
+%% loss
+	\node (loss2) at (2,3.75) {\textit{\tiny metabolic loss}};
+	\draw[fleche] (0,4.5) to[out=-90, in=-180] (loss2);
+
+	\node (loss1) at (2,1.25) {\textit{\tiny metabolic loss}};
+	\draw[fleche] (0,2) to[out=-90, in=-180] (loss1);
+
+%% Equations conso (bottom)
+	\node (inv1) at (0.25,4.5) {};
+	\node[below right] at (inv1) {\scriptsize consumption ($a$)};
+
+	\node (inv2) at (0.25,3) {};
+	\node[above right] at (inv2) {};
+
+	\node (inv3) at (0.25,2) {};
+	\node[below right] at (inv3) {\scriptsize consumption ($a$)};
+
+	\node (inv4) at (0.25,0.5) {};
+	\node[above right] at (inv4) {};
+
+\end{tikzpicture}

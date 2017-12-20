@@ -1,0 +1,81 @@
+% \documentclass[12pt,a4paper]{article}
+%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%
+% %% Packages %%
+% % font
+% \usepackage[T1]{fontenc}
+% \usepackage[utf8]{inputenc}
+% % language
+% \usepackage[french, english]{babel}
+%
+% % marges, space...
+% \usepackage[top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm]{geometry}
+% \usepackage{setspace}
+% \onehalfspacing
+% \usepackage[font=footnotesize,labelfont=bf]{caption}
+% \usepackage{subcaption}
+%
+% \usepackage{graphicx}
+% \usepackage{float}
+% \usepackage{pstool}
+% \usepackage{multirow}
+% \usepackage{booktabs,arydshln}
+% % mathematics
+% \usepackage{amsmath}
+% \usepackage{textcomp}
+%
+% % TikZ
+% \usepackage{tikz}
+% 	\usetikzlibrary{arrows, plotmarks, decorations.markings}
+% 	\tikzstyle{fleche} = [->,>=stealth,thick,rounded corners=4pt,line width=1pt]
+% 	\tikzstyle{fleche2} = [->,>=stealth,thick,dashed,rounded corners=4pt,line width=2pt]
+% 	\tikzstyle{fleche3} = [->,>=stealth,thick,rounded corners=4pt,line width=2pt]
+% 	\usetikzlibrary{shadows}
+% 	\usetikzlibrary{shadings,decorations.pathreplacing,angles,quotes}
+%
+%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% \begin{document}
+
+%
+% % FIGURE MODEL %%
+% \begin{figure}[!h]
+% \tikzset{
+% 	invisible/.style={opacity=0},
+% 	visible on/.style={alt={#1{}{invisible}}},
+% 	alt/.code args={<#1>#2#3}{%
+% 		\alt<#1>{\pgfkeysalso{#2}}{\pgfkeysalso{#3}} % \pgfkeysalso doesn't change the path
+% 	},
+% }
+
+\begin{tikzpicture}[thick]
+	\draw (4,6) circle (0.65);
+	\node (C) at (4,6) {C};
+
+	\draw (4,3) circle (0.65);
+	\node (H) at (4,3) {H};
+
+	\draw (4,0) circle (0.65);
+	\node (P) at (4,0) {P};
+
+	\node (T) at (0,3) {\textbf{\huge T}};
+
+	\node (CH) at (4,5.2) {};
+	\draw[fleche] (CH) -- (4,3.8);
+
+	\node (HP) at (4,2.2) {};
+	\draw[fleche] (HP) -- (4,0.8);
+
+	\draw[fleche2]	(T) to node [midway] (H) {} (2.5,3);
+
+
+\draw[decoration={brace,mirror,raise=5pt,amplitude=20pt},decorate]
+	  (5.5,0) -- node[right=35pt, text width = 4cm] (FI) {Interaction strength} (5.5,6);
+
+
+
+\end{tikzpicture}
+% \end{figure}
+%
+% \end{document}

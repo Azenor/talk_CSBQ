@@ -1,0 +1,419 @@
+\documentclass[11pt, compress, aspectratio=1610]{beamer}
+% Set language
+\usepackage{xstring}
+\newcommand{\Langue}[1]{%
+    \IfEqCase{#1}{%
+        {francais}{
+        \usepackage[utf8]{inputenc}
+        \usepackage[francais]{babel}
+        }%
+        {english}{\usepackage[english]{babel}}%
+    }[\PackageError{Langue}{Undefined option to language: #1}{}]%
+}%
+\Langue{english}
+
+\usetheme{pl}
+\usepackage{tikz}
+  \usetikzlibrary{arrows, plotmarks, decorations.markings}
+  \tikzstyle{fleche} = [->,>=stealth,thick,rounded corners=4pt,line width=0.7pt]
+  \tikzstyle{fleche2} = [->,>=stealth,thick,dashed,rounded corners=4pt,line width=1pt]
+  \tikzstyle{fleche3} = [->,>=stealth,thick,rounded corners=4pt,line width=4pt]
+  \tikzstyle{fleche4} = [->,>=stealth,thick,dashed,rounded corners=4pt,line width=0.5pt]
+  \tikzstyle{fleche5} = [->,>=stealth,thick,rounded corners=4pt,line width=2pt]
+  \usetikzlibrary{shadows}
+  \usetikzlibrary{shadings,decorations.pathreplacing,angles,quotes,overlay-beamer-styles}
+  \usetikzlibrary{positioning}
+  \tikzstyle{trait} = [-,>=stealth,rounded corners=2pt,line width=0.7pt]
+  \tikzstyle{trait2} = [-,>=stealth,dashed,rounded corners=2pt,line width=1pt]
+
+  \usetikzlibrary{automata,shapes.multipart}
+ \usepackage{relsize}
+\usepackage{longtable}
+\usepackage{booktabs}
+\usepackage{minted}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\},fontsize=\small}
+% Add ',fontsize=\small' for more characters per line
+\usepackage[framemethod=tikz]{mdframed}
+\definecolor{shadecolor}{HTML}{EEEEEE}
+\mdfsetup{
+  backgroundcolor=shadecolor,
+  linecolor=shadecolor,
+  innerleftmargin=5pt,
+  innerrightmargin=5pt,
+  leftmargin=-5pt,
+  rightmargin=-5pt,
+  roundcorner=3pt
+}
+\newenvironment{Shaded}{\begin{mdframed}}{\end{mdframed}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.26,0.66,0.93}{\textbf{{#1}}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.74,0.68,0.62}{\underline{{#1}}}}
+\newcommand{\DecValTok}[1]{\textcolor[HTML]{558B2F}{{#1}}}
+\newcommand{\BaseNTok}[1]{\textcolor[HTML]{558B2F}{{#1}}}
+\newcommand{\FloatTok}[1]{\textcolor[HTML]{558B2F}{{#1}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.74,0.68,0.62}{{#1}}}
+\newcommand{\CharTok}[1]{\textcolor[HTML]{7E57C2}{{#1}}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[HTML]{7E57C2}{{#1}}}
+\newcommand{\StringTok}[1]{\textcolor[HTML]{7E57C2}{{#1}}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[HTML]{7E57C2}{{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[HTML]{7E57C2}{{#1}}}
+\newcommand{\ImportTok}[1]{\textcolor[rgb]{0.74,0.68,0.62}{{#1}}}
+\newcommand{\CommentTok}[1]{\textcolor[HTML]{546E7A}{\textit{{#1}}}}
+\newcommand{\DocumentationTok}[1]{\textcolor[HTML]{BCAAA4}{\textit{{#1}}}}
+\newcommand{\AnnotationTok}[1]{\textcolor[HTML]{BCAAA4}{\textbf{\textit{{#1}}}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.74,0.68,0.62}{{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.74,0.68,0.62}{{#1}}}
+\newcommand{\FunctionTok}[1]{\textcolor[HTML]{26A69A}{\textbf{{#1}}}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.74,0.68,0.62}{{#1}}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.26,0.66,0.93}{\textbf{{#1}}}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.74,0.68,0.62}{{#1}}}
+\newcommand{\BuiltInTok}[1]{\textcolor[HTML]{42A5F5}{{#1}}}
+\newcommand{\ExtensionTok}[1]{\textcolor[rgb]{0.74,0.68,0.62}{{#1}}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.68,0.62}{\textbf{{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.74,0.68,0.62}{{#1}}}
+\newcommand{\RegionMarkerTok}[1]{\textcolor[rgb]{0.74,0.68,0.62}{{#1}}}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.00,0.40,1.00}{\textbf{\textit{{#1}}}}}
+\newcommand{\WarningTok}[1]{\textcolor[HTML]{FF6E40}{\textbf{{#1}}}}
+\newcommand{\AlertTok}[1]{\textcolor[HTML]{FF3D00}{{#1}}}
+\newcommand{\ErrorTok}[1]{\textcolor[HTML]{DD2C00}{\textbf{{#1}}}}
+\newcommand{\NormalTok}[1]{\textcolor[HTML]{212121}{{#1}}}
+\newcommand\smallcitation[1]{% command to add small citation in the corner
+\begin{textblock*}{\textwidth}(30pt,\textheight)
+    \raggedleft \small\textit{#1}
+\end{textblock*}}
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+\let\OldTexttt\texttt
+\renewcommand{\texttt}[1]{\OldTexttt{\color{plTT}#1}}
+
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\makeatother
+
+\usepgfplotslibrary{dateplot}
+
+\newcommand{\begincols}{\begin{columns}}
+\newcommand{\stopcols}{\end{columns}}
+\newcommand{\roundpicture}[2]{%
+\tikz\node[circle,
+          text=white,
+          minimum width=4cm,
+          minimum height=4cm,
+          path picture={
+              \node at (path picture bounding box.center){
+                  \includegraphics[width=4cm]{#1}
+              };
+          }]{#2};
+}
+\newcommand{\plain}[1]{%
+\begin{picture}(0,0)
+  \put(-28.5,-175){%
+      \pgfuseimage{titlebackground}
+  }
+  \put(0,-145){%
+      \begin{minipage}[b][4.5cm][t]{0.5\textwidth}
+          \color{white}\huge
+              #1
+      \end{minipage}
+  }
+\end{picture}
+}
+
+\title{A consumer-resource model to assess the effects of temperature on
+interaction strength}
+\subtitle{}
+\date{\today}
+\author{\textbf{Azenor Bideault}\\
+Supervisors: Dominique Gravel \& Michel Loreau \newline}
+\institute{Université de Sherbooke}
+
+\begin{document}
+
+\maketitle
+
+\begin{frame}{Temperature: major environmental gradient}
+
+\centering
+Mean annual temperatures
+\includegraphics[width=1\linewidth]{figuresAz/AnmeanTempST.pdf}
+\smallcitation{Worldclim data}
+
+\end{frame}
+
+\begin{frame}{Effects of temperature}
+
+\begincols
+ \column{0.48\textwidth} \centering
+ Metabolic rate \par
+ \includegraphics[width=0.4\linewidth]{figuresAz/cell.png}\par
+ \vspace{1cm} \pause
+ Biological rates (growth rate) \par
+ \includegraphics[width=0.5\linewidth]{figuresAz/fish_pop.pdf} \pause
+ \hfill\column{0.48\textwidth} \centering
+ Body-size \par
+ \includegraphics[width=0.6\linewidth]{figuresAz/size.pdf}\par
+ \vspace{1cm} \pause
+ Species distribution \par
+ \includegraphics[width=0.8\linewidth]{figuresAz/world.pdf} \par
+
+\stopcols
+
+\end{frame}
+
+\begin{frame}{Landscape-level effects of trophic interactions}
+
+\centering
+ \includegraphics[width=0.7\linewidth]{figuresAz/estes2011.png}\par
+\smallcitation{Estes \textit{et al} 2011}
+
+\end{frame}
+
+\begin{frame}{Effects of temperature on trophic regulation}
+
+\centering
+ \input{figuresAz/schema2.tex}\par
+
+\end{frame}
+
+\begin{frame}{Effects of temperature on trophic regulation}
+
+\centering
+\input{figuresAz/schemaFlGrasse.tex}\par
+\smallcitation{Beveridge et al 2010, Kratina et al 2012, Shurin et al 2012}
+
+\end{frame}
+
+\section{Model}\label{model}
+
+\begin{frame}{Tri-trophic model}
+
+\begincols
+ \column{0.48\textwidth} \centering
+ \input{figuresAz/schema_model.tex}\par
+ \hfill\column{0.48\textwidth}
+
+\begin{description}
+\tightlist
+\item[\(\mu\)]
+growth rate
+\item[\(a\)]
+attack rate
+\item[\(z\)]
+mortality rate
+\end{description}
+
+\stopcols
+
+\end{frame}
+
+\begin{frame}{Temperature dependence of organisms' biological rates}
+
+\begincols
+\column{0.48\textwidth} \centering
+\includegraphics[width=1\linewidth]{figuresAz/MTE.pdf}
+
+\hfill\column{0.48\textwidth}
+
+\[
+    r(T)= r_0 \textbf{m}^{\beta} exp^{\biggl(-\dfrac{\textbf{E}}{k\textbf{T}}\biggr)}\mathlarger{L}(T)
+\]
+
+~
+
+\begin{description}
+\tightlist
+\item[\(r(T)\)]
+biological rate
+\item[\(m\)]
+body-mass
+\item[\(E\)]
+activation energy
+\item[\(T\)]
+temperature
+\item[\(L(T)\)]
+decreasing phase
+\item[\(\beta\), \(r_0\), \(k\)]
+constants
+\end{description}
+
+\stopcols
+\smallcitation{Gillooly et al 2001, Brown et al 2004, Savage et al 2004, Pawar et al 2015}
+
+\end{frame}
+
+\section{Direct and indirect effects of temperature on trophic
+regulation}\label{direct-and-indirect-effects-of-temperature-on-trophic-regulation}
+
+\begin{frame}{Interaction strength measures}
+
+\centering
+ \input{figuresAz/schema_FNI1.tex}\par
+
+\end{frame}
+
+\begin{frame}{Direct and indirect effects of temperature}
+
+Direct effect on biological traits \par
+\includegraphics[width=0.2\linewidth]{figuresAz/fish_pop.pdf} \par
+\vspace{1cm}
+
+Indirect effect through decreasing body-size \par
+
+\includegraphics[width=0.2\linewidth]{figuresAz/size.pdf}
+
+\end{frame}
+
+\section{Results}\label{results}
+
+\begin{frame}{Direct effect of temperature on biological traits}
+
+\centering
+\includegraphics[width=0.4\linewidth]{figuresAz/fish_pop.pdf} \par
+
+\end{frame}
+
+\begin{frame}{Temperature dependence of interaction strength measures
+are consistent}
+
+\centering
+Effect of herbivore on primary producers \vspace{1cm}
+
+\begincols
+ \column{.33\textwidth} \centering
+ Per capita \includegraphics[width=1.1\linewidth]{figuresAz/ISpc.pdf}
+\column{.33\textwidth} \centering
+ Per population
+\includegraphics[width=1.1\linewidth]{figuresAz/ISpop.pdf}
+
+\column{.33\textwidth} \centering
+ Net \includegraphics[width=1.1\linewidth]{figuresAz/NetIS.pdf}
+
+\stopcols
+
+\end{frame}
+
+\begin{frame}{Heterogeneous dependencies}
+
+\centering
+Effect of carnivores on herbivores ~
+
+\begin{longtable}[c]{@{}lcc@{}}
+\toprule
+Fixed parameters & IS per population & IS net\tabularnewline
+\midrule
+\endhead
+\(\emptyset\) & \(\cap\) & \(\cap\)\tabularnewline
+\(a_{hc}\) & \(\cap\) & \(\textcolor{red}{\cup}\)\tabularnewline
+\(a_{ph}\), \(a_{hc}\) & \(\textcolor{red}{\cup}\) &
+\(\textcolor{red}{\cup}\)\tabularnewline
+H: \(a_{ph}\), \(z_h\) & \(\textcolor{red}{\cup}\) &
+\(\cap\)\tabularnewline
+C: \(a_{hc}\), \(z_c\) & \(\cap\) &
+\(\textcolor{red}{\cup}\)\tabularnewline
+\bottomrule
+\end{longtable}
+
+\begin{description}
+\tightlist
+\item[\(a\)]
+attack rate
+\item[\(z\)]
+mortality rate
+\end{description}
+
+\end{frame}
+
+\begin{frame}{Indirect effect of temperature through decreasing
+body-size}
+
+\centering
+\includegraphics[width=0.7\linewidth]{figuresAz/size.pdf}
+
+\end{frame}
+
+\begin{frame}{Indirect effect of temperature through decreasing
+body-size}
+
+\centering
+Effect of carnivores on herbivores \vspace{1cm}
+
+\begincols
+ \column{.33\textwidth} \centering
+Per capita \includegraphics[width=1.1\linewidth]{figuresAz/ISpcBS.pdf}
+\column{.33\textwidth} \pause
+\centering
+Per population
+\includegraphics[width=1.1\linewidth]{figuresAz/ISpopBS.pdf}
+
+\column{.33\textwidth} \pause
+\centering
+Net \includegraphics[width=1.1\linewidth]{figuresAz/ISnetBS.pdf}
+
+\stopcols
+
+\end{frame}
+
+\begin{frame}{Effect of temperature on interaction strength through
+biological traits}
+
+\centering
+\includegraphics[width=0.3\linewidth]{figuresAz/fish_pop.pdf} \par
+
+\begin{itemize}
+\tightlist
+\item
+  Temperature dependence of different interaction strength measures are
+  consistent
+\item
+  Heterogeneous dependencies: variations according to which parameters
+  are temperature dependent
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Indirect effect of temperature on interaction strength}
+
+\centering
+ \includegraphics[width=0.3\linewidth]{figuresAz/size.pdf} \par
+
+\begin{itemize}
+\tightlist
+\item
+  Temperature can indirectly decrease or increase interaction strength
+\item
+  The indirect effect of temperature on trophic regulation through
+  decreasing body-size may enhance or decrease its direct effect on
+  biological traits
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Various effects of temperature on interaction strength}
+
+\centering
+Temperature has numerous and potentially conflicting effects on
+interaction strength: \par
+\vspace{1cm} developping a framework that integrates various effects of
+temperature on interaction strength is key in understanding food web
+dynamics
+
+\end{frame}
+
+\begin{frame}{Merci de votre attention}
+
+\end{frame}
+
+\begin{frame}[plain]
+  \begin{picture}(0,0)
+    \put(-28.5,-175){%
+      \pgfuseimage{titlebackground}
+    }
+  \end{picture}
+\end{frame}
+
+\end{document}

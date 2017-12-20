@@ -1,0 +1,60 @@
+% \documentclass[12pt,a4paper]{article}
+%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%
+% %% Packages %%
+% % font
+% \usepackage[T1]{fontenc}
+% \usepackage[utf8]{inputenc}
+% % language
+% \usepackage[french, english]{babel}
+%
+% % marges, space...
+% \usepackage[top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm]{geometry}
+% \usepackage{setspace}
+% \onehalfspacing
+% \usepackage[font=footnotesize,labelfont=bf]{caption}
+% \usepackage{subcaption}
+%
+% \usepackage{graphicx}
+% \usepackage{float}
+% \usepackage{pstool}
+% \usepackage{multirow}
+% \usepackage{booktabs,arydshln}
+% % mathematics
+% \usepackage{amsmath}
+% \usepackage{textcomp}
+%
+% % TikZ
+% \usepackage{tikz}
+% 	\usetikzlibrary{arrows, plotmarks, decorations.markings}
+% 	\tikzstyle{fleche} = [->,>=stealth,thick,rounded corners=4pt,line width=1pt]
+% 	\tikzstyle{fleche2} = [->,>=stealth,thick,dashed,rounded corners=4pt,line width=2pt]
+% 	\tikzstyle{fleche3} = [->,>=stealth,thick,rounded corners=4pt,line width=2pt]
+% 	\usetikzlibrary{shadows}
+% 	\usetikzlibrary{shadings,decorations.pathreplacing,angles,quotes}
+%
+%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% \begin{document}
+%
+%
+% % FIGURE MODEL %%
+% \begin{figure}[!h]
+
+
+\begin{tikzpicture}[thick]
+	\draw (6,3) circle (0.65);
+	\node (H) at (6,3) {$H^*$};
+
+	\draw (6,0) circle (0.65);
+	\node (PH) at (6,0) {$P^*_H$};
+
+	\node (lPH) at (6,2.2) {};
+	\draw[fleche] (lPH) -- (6,0.8) node[right] {$a_{\textsc{\tiny ph}} H^*$};
+
+
+\end{tikzpicture}
+% \end{figure}
+%
+% \end{document}
